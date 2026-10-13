@@ -1,0 +1,164 @@
+{
+  "filename": "demo.m4a",
+  "language": "ar",
+  "duration": 181.3,
+  "text": "صباح الخير عمر، shall we start? بدنا نحكي عن الـ loyalty pilot اليوم. عندي deadline من الـ client، they want a demo before end of month. صباح النور. زين، أنا جاهز. اليوم الـ backend وايد busy بس ماشي. تمام. أول شي، the points logic. الـ client بدهم كل عشرة ريال تساوي نقطة وحدة، and points expire after six months. Six months okay، بس الـ expiry job لازم نسويه cron يومي. ما أبي نحسبه real-time، it's too heavy على الـ database. منطقي. So we agree: daily batch job للـ expiry، مش real-time. إي، agreed. وبعدين الـ API للـ POS integration، I'll write the docs. إيمتى بيكونوا جاهزين؟ لأنه Rana محتاجتهم للـ designs. خلني أقول by Thursday. الخميس إن شاء الله، the first draft. ممتاز. أنا رح أكتب الـ Arabic copy للـ push notifications. بدي يكون الكلام natural، مش ترجمة حرفية. هذا مهم وايد. آخر مرة الـ translation كانت robotic والناس ما فهموا شي. بالزبط. I'll have the copy ready by Tuesday، وببعته لـ Rana عشان تحطه بالـ mockups. Okay. سؤال: الـ pilot بكم فرع؟ الـ client قالوا two branches بس ما أكدوا أي فروع. Two branches، yes. بس which ones still open. رح أسألهم وأرجعلك. أوكي. And the SMS budget؟ إذا بنرسل OTP بالـ SMS، الكلفة بتزيد. ما في budget approved للـ SMS لهلأ. Let's park it، ونبدأ بالـ push notifications بس. زين، decision: push only للـ pilot. خلني أشيك الـ staging شي ثانية. Okay، الـ staging شغال. I can deploy the points service there by Sunday. حلو كتير. So to recap: Thursday API docs منك، Tuesday Arabic copy مني، Sunday staging deploy. And open questions: which two branches، والـ SMS budget. أنا بكتبهم بالـ ticket. تمام، يعطيك العافية عمر. نحكي الأسبوع الجاي، same time. الله يعافيك. Bye.",
+  "segments": [
+    {
+      "start": 0.0,
+      "end": 6.2,
+      "text": " صباح الخير عمر، shall we start? بدنا نحكي عن الـ loyalty pilot اليوم.",
+      "speaker": "SPEAKER_00"
+    },
+    {
+      "start": 6.6,
+      "end": 12.4,
+      "text": " عندي deadline من الـ client، they want a demo before end of month.",
+      "speaker": "SPEAKER_00"
+    },
+    {
+      "start": 13.0,
+      "end": 19.8,
+      "text": " صباح النور. زين، أنا جاهز. اليوم الـ backend وايد busy بس ماشي.",
+      "speaker": "SPEAKER_01"
+    },
+    {
+      "start": 20.3,
+      "end": 29.5,
+      "text": " تمام. أول شي، the points logic. الـ client بدهم كل عشرة ريال تساوي نقطة وحدة، and points expire after six months.",
+      "speaker": "SPEAKER_00"
+    },
+    {
+      "start": 30.1,
+      "end": 38.0,
+      "text": " Six months okay، بس الـ expiry job لازم نسويه cron يومي. ما أبي نحسبه real-time، it's too heavy على الـ database.",
+      "speaker": "SPEAKER_01"
+    },
+    {
+      "start": 38.6,
+      "end": 44.9,
+      "text": " منطقي. So we agree: daily batch job للـ expiry، مش real-time.",
+      "speaker": "SPEAKER_00"
+    },
+    {
+      "start": 45.4,
+      "end": 52.0,
+      "text": " إي، agreed. وبعدين الـ API للـ POS integration، I'll write the docs.",
+      "speaker": "SPEAKER_01"
+    },
+    {
+      "start": 52.5,
+      "end": 57.8,
+      "text": " إيمتى بيكونوا جاهزين؟ لأنه Rana محتاجتهم للـ designs.",
+      "speaker": "SPEAKER_00"
+    },
+    {
+      "start": 58.3,
+      "end": 64.0,
+      "text": " خلني أقول by Thursday. الخميس إن شاء الله، the first draft.",
+      "speaker": "SPEAKER_01"
+    },
+    {
+      "start": 64.5,
+      "end": 73.2,
+      "text": " ممتاز. أنا رح أكتب الـ Arabic copy للـ push notifications. بدي يكون الكلام natural، مش ترجمة حرفية.",
+      "speaker": "SPEAKER_00"
+    },
+    {
+      "start": 73.7,
+      "end": 80.5,
+      "text": " هذا مهم وايد. آخر مرة الـ translation كانت robotic والناس ما فهموا شي.",
+      "speaker": "SPEAKER_01"
+    },
+    {
+      "start": 81.0,
+      "end": 89.6,
+      "text": " بالزبط. I'll have the copy ready by Tuesday، وببعته لـ Rana عشان تحطه بالـ mockups.",
+      "speaker": "SPEAKER_00"
+    },
+    {
+      "start": 90.2,
+      "end": 91.4,
+      "text": " Okay.",
+      "speaker": "UNKNOWN"
+    },
+    {
+      "start": 92.0,
+      "end": 99.5,
+      "text": " سؤال: الـ pilot بكم فرع؟ الـ client قالوا two branches بس ما أكدوا أي فروع.",
+      "speaker": "SPEAKER_01"
+    },
+    {
+      "start": 100.0,
+      "end": 108.3,
+      "text": " Two branches، yes. بس which ones still open. رح أسألهم وأرجعلك.",
+      "speaker": "SPEAKER_00"
+    },
+    {
+      "start": 108.9,
+      "end": 115.6,
+      "text": " أوكي. And the SMS budget؟ إذا بنرسل OTP بالـ SMS، الكلفة بتزيد.",
+      "speaker": "SPEAKER_01"
+    },
+    {
+      "start": 116.1,
+      "end": 122.8,
+      "text": " ما في budget approved للـ SMS لهلأ. Let's park it، ونبدأ بالـ push notifications بس.",
+      "speaker": "SPEAKER_00"
+    },
+    {
+      "start": 123.3,
+      "end": 129.0,
+      "text": " زين، decision: push only للـ pilot. خلني أشيك الـ staging شي ثانية.",
+      "speaker": "SPEAKER_01"
+    },
+    {
+      "start": 146.5,
+      "end": 153.2,
+      "text": " Okay، الـ staging شغال. I can deploy the points service there by Sunday.",
+      "speaker": "SPEAKER_01"
+    },
+    {
+      "start": 153.8,
+      "end": 161.0,
+      "text": " حلو كتير. So to recap: Thursday API docs منك، Tuesday Arabic copy مني، Sunday staging deploy.",
+      "speaker": "SPEAKER_00"
+    },
+    {
+      "start": 161.5,
+      "end": 168.9,
+      "text": " And open questions: which two branches، والـ SMS budget. أنا بكتبهم بالـ ticket.",
+      "speaker": "SPEAKER_01"
+    },
+    {
+      "start": 169.4,
+      "end": 176.0,
+      "text": " تمام، يعطيك العافية عمر. نحكي الأسبوع الجاي، same time.",
+      "speaker": "SPEAKER_00"
+    },
+    {
+      "start": 176.4,
+      "end": 179.6,
+      "text": " الله يعافيك. Bye.",
+      "speaker": "SPEAKER_01"
+    }
+  ],
+  "diarized": true,
+  "speakers": [
+    {
+      "speaker": "SPEAKER_00",
+      "total_seconds": 78.9,
+      "segment_count": 11
+    },
+    {
+      "speaker": "SPEAKER_01",
+      "total_seconds": 71.0,
+      "segment_count": 11
+    },
+    {
+      "speaker": "UNKNOWN",
+      "total_seconds": 1.2,
+      "segment_count": 1
+    }
+  ]
+}

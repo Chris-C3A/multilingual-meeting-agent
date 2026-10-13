@@ -1,0 +1,46 @@
+{
+  "stem": "demo",
+  "title": "Loyalty pilot sync: points logic, notifications, staging",
+  "date": null,
+  "language": "ar",
+  "privacy": "owner-only",
+  "category": "work",
+  "summary": "Layla and Omar planned the loyalty-points pilot for a client that wants a demo before the end of the month. Points expire after six months and expiry runs as a daily batch job. The pilot uses push notifications only; SMS is parked until a budget exists. Which two branches run the pilot is still open.",
+  "decisions": [
+    {"text": "Point expiry runs as a daily batch (cron) job, not in real time.", "ts": "00:38"},
+    {"text": "The pilot uses push notifications only; SMS/OTP is parked until budget is approved.", "ts": "01:56"},
+    {"text": "The pilot runs in two client branches.", "ts": "01:40"}
+  ],
+  "action_items": [
+    {"text": "First draft of the POS integration API docs", "owner": "Omar", "due": "Thursday", "status": "todo", "ts": "00:58"},
+    {"text": "Natural (not literal) Arabic copy for push notifications, then send to Rana for the mockups", "owner": "Layla", "due": "Tuesday", "status": "todo", "ts": "01:21"},
+    {"text": "Deploy the points service to staging", "owner": "Omar", "due": "Sunday", "status": "todo", "ts": "02:26"},
+    {"text": "Ask the client which two branches run the pilot", "owner": "Layla", "due": null, "status": "todo", "ts": "01:40"},
+    {"text": "Log the open questions in the ticket", "owner": "Omar", "due": null, "status": "todo", "ts": "02:41"}
+  ],
+  "open_questions": [
+    {"text": "Which two branches will run the pilot?", "owner": "Layla", "ts": "01:32"},
+    {"text": "Is there budget for SMS (OTP) after the pilot?", "owner": null, "ts": "01:48"}
+  ],
+  "people": [
+    {"name": "Layla", "speaker": "SPEAKER_00", "role": "product lead (inferred)", "present": true, "name_confirmed": true},
+    {"name": "Omar", "speaker": "SPEAKER_01", "role": "backend engineer (inferred)", "present": true, "name_confirmed": true},
+    {"name": "Rana", "speaker": null, "role": "designer (inferred)", "present": false, "name_confirmed": false}
+  ],
+  "companies": [
+    {"name": "the client (unnamed)", "context": "Retail client with branches and a POS; wants a demo before end of month."}
+  ],
+  "quotes": [
+    {"text": "بدي يكون الكلام natural، مش ترجمة حرفية.", "translation": "I want the wording to be natural, not a literal translation.", "speaker": "Layla", "ts": "01:04"},
+    {"text": "خلني أقول by Thursday. الخميس إن شاء الله", "translation": "Let's say by Thursday. Thursday, God willing.", "speaker": "Omar", "ts": "00:58"}
+  ],
+  "language_notes": [
+    "Layla speaks Levantine Arabic (بدنا، رح، هلأ، كتير); Omar speaks Gulf Arabic (وايد، أبي، زين، نسويه).",
+    "Technical terms stay in English inside Arabic sentences (cron, real-time, staging, API, POS), usually with the الـ prefix.",
+    "Omar's Thursday deadline comes with إن شاء الله; treat it as a soft commitment for a first draft.",
+    "One short \"Okay.\" at 01:30 could not be attributed to a speaker (UNKNOWN)."
+  ],
+  "quality_notes": [
+    "Synthetic sample transcript; no audio."
+  ]
+}
