@@ -9,11 +9,11 @@ Each phase lands as its own PR, built by Claude Code (Opus 5.5) and independentl
 - [x] CI: lint + tests on push/PR
 
 ## Phase 1: Modal transcription app
-- [ ] `modal_app/app.py`: faster-whisper + code-switching fine-tune on L4, float16, beam 5, VAD
-- [ ] pyannote diarization, speaker-to-segment alignment
-- [ ] Async API: `POST /submit` → call id, `GET /result` (202 running / 200 done)
+- [x] `modal_app/app.py`: faster-whisper + code-switching fine-tune on L4, float16, beam 5, VAD
+- [x] pyannote diarization, speaker-to-segment alignment
+- [x] Async API: `POST /submit` → call id, `GET /result` (202 running / 200 done)
 - [ ] `modal deploy` instructions (stable URL, not `modal serve`)
-- [ ] Handles missing `tokenizer.json` in the fine-tune repo
+- [x] Handles missing `tokenizer.json` in the fine-tune repo
 
 ## Phase 2: Core pipeline + CLI
 - [ ] `mma run <audio>`: submit → poll → write `transcript.json`, `clean.md` (merged speaker turns, timestamps), `transcript.html`
