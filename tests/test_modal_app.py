@@ -18,7 +18,9 @@ def test_app_parses():
 def load_app_standalone(monkeypatch, name):
     """Import app.py the way the container does: a top-level module, no package."""
     modal = pytest.importorskip("modal")  # optional: `uv sync --group modal`
-    monkeypatch.setitem(sys.modules, "modal_app", None)  # package import -> ModuleNotFoundError
+    # Package import -> ModuleNotFoundError (block the cached submodule too).
+    monkeypatch.setitem(sys.modules, "modal_app", None)
+    monkeypatch.setitem(sys.modules, "modal_app.alignment", None)
     monkeypatch.syspath_prepend(str(APP_PATH.parent))
     monkeypatch.delitem(sys.modules, "alignment", raising=False)
     spec = importlib.util.spec_from_file_location(name, APP_PATH)
