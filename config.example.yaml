@@ -1,0 +1,65 @@
+# multilingual-meeting-agent configuration.
+#
+# Copy to config.yaml (git-ignored) and edit. Every value here has a default, so
+# you only need the keys you want to change. Env vars override this file:
+#
+#   MMA_CONFIG              path to this file (default: ./config.yaml)
+#   MMA_STT_SUBMIT_URL      overrides stt.submit_url
+#   MMA_STT_RESULT_URL      overrides stt.result_url
+#   MMA_STT_LANGUAGE        overrides stt.language
+#   MMA_STT_POLL_INTERVAL   overrides stt.poll_interval
+#   MMA_STT_POLL_TIMEOUT    overrides stt.poll_timeout
+#   SMTP_HOST / SMTP_PORT / SMTP_USER / SMTP_FROM   override sinks.email.*
+#
+# Secrets are read from the environment ONLY (never put them in this file):
+#
+#   HF_TOKEN                Hugging Face token (pyannote gated model, stored as a Modal secret)
+#   ANTHROPIC_API_KEY       agent runner (Claude Code)
+#   GITHUB_TOKEN            GitHub issues sink
+#   SMTP_PASSWORD           email sink
+#   SLACK_WEBHOOK_URL       Slack sink
+
+stt:
+  # Printed by `modal deploy modal_app/app.py`. Shape:
+  #   https://<workspace>--<app-name>-submit.modal.run
+  #   https://<workspace>--<app-name>-result.modal.run
+  submit_url: ""
+  result_url: ""
+  language: ar          # "ar", "en", ... or "auto" to detect
+  diarize: true
+  num_speakers: null    # null = let pyannote estimate; set when you know it
+  poll_interval: 10     # seconds between GET /result polls
+  poll_timeout: 3600    # give up after this many seconds
+
+agent:
+  runner: claude-code   # claude-code | opencode
+  fallback: opencode    # null to disable
+  skills_dir: skills
+  timeout: 900          # seconds per agent run
+
+sinks:
+  output_dir: results   # transcript.json, clean.md, brief.* land here
+  brief:
+    enabled: true
+    formats: [md, html]
+  github:
+    enabled: false
+    repo: ""            # owner/name
+    labels: [meeting-action]
+  email:
+    enabled: false
+    smtp_host: ""
+    smtp_port: 587
+    smtp_user: ""
+    from_addr: ""
+    to: []
+  slack:
+    enabled: false      # webhook URL comes from SLACK_WEBHOOK_URL
+  wiki:
+    enabled: false
+    path: wiki
+
+rules:
+  privacy_mode: owner-only   # owner-only | shared
+  owner: ""                  # where owner-only output is delivered
+  routing: {}                # category -> [recipients], e.g. {sales: [team@example.com]}
