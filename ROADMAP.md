@@ -3,10 +3,10 @@
 Each phase lands as its own PR, built by Claude Code (Opus 5.5) and independently verified before merge.
 
 ## Phase 0: Foundation
-- [ ] Repo hygiene: LICENSE (MIT), `.gitignore`, `pyproject.toml` (uv), ruff, pytest
-- [ ] `config.example.yaml` + env var conventions (`MODAL_*`, `HF_TOKEN`, `ANTHROPIC_API_KEY`, `GITHUB_TOKEN`, `SMTP_*`, `SLACK_WEBHOOK_URL`)
-- [ ] `docs/architecture.md` with the pipeline diagram
-- [ ] CI: lint + tests on push/PR
+- [x] Repo hygiene: LICENSE (MIT), `.gitignore`, `pyproject.toml` (uv), ruff, pytest
+- [x] `config.example.yaml` + env var conventions (`MMA_*`, `HF_TOKEN`, `ANTHROPIC_API_KEY`, `GITHUB_TOKEN`, `SMTP_*`, `SLACK_WEBHOOK_URL`)
+- [x] `docs/architecture.md` with the pipeline diagram
+- [x] CI: lint + tests on push/PR
 
 ## Phase 1: Modal transcription app
 - [ ] `modal_app/app.py`: faster-whisper + code-switching fine-tune on L4, float16, beam 5, VAD
