@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<!--
+  Meeting-brief template for the process-meeting skill.
+  Placeholders: {{TITLE}} {{EYEBROW}} {{SUBTITLE}} {{META_CHIPS}} {{SECTIONS}} {{TRANSCRIPT}} {{TRANSCRIPT_NO}} {{FOOTER}}
+  Fill every placeholder, then delete this comment.
+  Accent per meeting: set --accent / --accent-ink in all three theme blocks.
+    Internal syncs:   green  #0E9F7A / #0B7A5E   (dark: #33C79A / #4AD3A8)
+    External calls:   orange #E8622C / #C24E1F   (dark: #FF8A50 / #FF9A66)
+  Section anatomy (compose per meeting, number the labels 01, 02, ...):
+    Who spoke (talk-time bars) -> TL;DR -> Decisions & open questions ->
+    Timeline -> Action items table -> Risks -> Quotes -> Full transcript.
+  Arabic text: put dir="auto" on the element (quotes, transcript turns).
+  Everything from the transcript must be HTML-escaped.
+-->
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>{{TITLE}}</title>
+<style>
+:root{
+  --bg:#FBFAF7; --ink:#20242A; --muted:#6E7378; --hair:#E6E4DD; --card:#F3F1EA;
+  --accent:#0E9F7A; --accent-ink:#0B7A5E; --warn:#B4552D; --done:#4A7A43;
+  --mono:ui-monospace,"SF Mono",Menlo,Consolas,monospace;
+  --disp:"Avenir Next","Seravek","Segoe UI Variable","Segoe UI",system-ui,sans-serif;
+  --body:"Charter","Iowan Old Style",Georgia,"Times New Roman",serif;
+}
+@media (prefers-color-scheme: dark){:root{
+  --bg:#191B1E; --ink:#EAE8E2; --muted:#9BA0A6; --hair:#2C2F33; --card:#212428;
+  --accent:#33C79A; --accent-ink:#4AD3A8; --warn:#E08050; --done:#8CBF7E;
+}}
+:root[data-theme="dark"]{
+  --bg:#191B1E; --ink:#EAE8E2; --muted:#9BA0A6; --hair:#2C2F33; --card:#212428;
+  --accent:#33C79A; --accent-ink:#4AD3A8; --warn:#E08050; --done:#8CBF7E;
+}
+:root[data-theme="light"]{
+  --bg:#FBFAF7; --ink:#20242A; --muted:#6E7378; --hair:#E6E4DD; --card:#F3F1EA;
+  --accent:#0E9F7A; --accent-ink:#0B7A5E; --warn:#B4552D; --done:#4A7A43;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+body{background:var(--bg);color:var(--ink);font-family:var(--body);font-size:17px;line-height:1.65;
+  padding:clamp(24px,5vw,64px) 20px 96px}
+.page{max-width:720px;margin:0 auto}
+.eyebrow{font-family:var(--mono);font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--accent-ink)}
+header h1{font-family:var(--disp);font-weight:600;font-size:clamp(28px,5vw,40px);line-height:1.12;
+  letter-spacing:-.015em;text-wrap:balance;margin:10px 0 6px}
+.subtitle{color:var(--muted);font-size:16px;max-width:56ch}
+.meta-row{display:flex;flex-wrap:wrap;gap:8px;margin-top:20px}
+.chip{font-family:var(--mono);font-size:12px;color:var(--muted);border:1px solid var(--hair);
+  border-radius:3px;padding:4px 10px;background:var(--card)}
+.chip b{color:var(--ink);font-weight:600}
+section{margin-top:52px}
+.sec-label{font-family:var(--mono);font-size:11px;letter-spacing:.14em;text-transform:uppercase;
+  color:var(--muted);border-top:1px solid var(--hair);padding-top:14px;margin-bottom:18px}
+.sec-label span{color:var(--accent-ink)}
+h2{font-family:var(--disp);font-weight:600;font-size:22px;letter-spacing:-.01em;margin-bottom:12px;text-wrap:balance}
+p+p{margin-top:12px}
+.lede{font-size:19px;line-height:1.6}
+/* speakers / talk-time bars */
+.sp-grid{display:grid;gap:14px}
+.sp-row{display:grid;grid-template-columns:150px 1fr 64px;gap:12px;align-items:center}
+.sp-name{font-family:var(--disp);font-weight:600;font-size:14px}
+.sp-role{display:block;font-family:var(--mono);font-size:10.5px;color:var(--muted);letter-spacing:.04em;font-weight:400}
+.bar{height:10px;background:var(--card);border-radius:2px;overflow:hidden}
+.bar i{display:block;height:100%;background:var(--accent);opacity:.85}
+.sp-min{font-family:var(--mono);font-size:12px;color:var(--muted);text-align:right;font-variant-numeric:tabular-nums}
+.footnote{font-size:13.5px;color:var(--muted);margin-top:14px;font-style:italic}
+/* decision / open-question cards (add class "open" for open ones, tick "?") */
+.dec{display:grid;gap:10px}
+.dec-item{display:grid;grid-template-columns:20px 1fr;gap:12px;padding:14px 16px;background:var(--card);
+  border:1px solid var(--hair);border-radius:4px}
+.dec-item .tick{color:var(--done);font-family:var(--mono);font-weight:700}
+.dec-item.open .tick{color:var(--warn)}
+.dec-item b{font-family:var(--disp);font-weight:600;font-size:15.5px}
+.dec-item p{font-size:15px;color:var(--muted);margin-top:3px}
+/* timeline */
+.tl{border-left:2px solid var(--hair);margin-left:6px;padding-left:22px;display:grid;gap:26px}
+.tl-item{position:relative}
+.tl-item::before{content:"";position:absolute;left:-28px;top:7px;width:9px;height:9px;border-radius:50%;
+  background:var(--bg);border:2px solid var(--accent)}
+.tl-ts{font-family:var(--mono);font-size:11.5px;color:var(--accent-ink);font-variant-numeric:tabular-nums}
+.tl-item h3{font-family:var(--disp);font-weight:600;font-size:16.5px;margin:2px 0 4px}
+.tl-item p{font-size:15px;color:var(--muted)}
+.tl-item p q{color:var(--ink)}
+/* action items table */
+table{width:100%;border-collapse:collapse;font-size:15px}
+th{font-family:var(--mono);font-size:10.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);
+  text-align:left;padding:8px 10px;border-bottom:1px solid var(--hair)}
+td{padding:11px 10px;border-bottom:1px solid var(--hair);vertical-align:top}
+td:first-child{font-family:var(--disp);font-weight:500;font-size:14.5px}
+.owner{font-family:var(--mono);font-size:11.5px;white-space:nowrap;color:var(--accent-ink)}
+.status{font-family:var(--mono);font-size:11px;white-space:nowrap}
+.status.done{color:var(--done)} .status.todo{color:var(--warn)}
+.tbl-wrap{overflow-x:auto}
+/* quotes — dir="auto" on Arabic quotes */
+.quote{border-left:3px solid var(--accent);padding:4px 0 4px 18px;margin-top:18px}
+.quote p{font-size:16.5px;font-style:italic}
+.quote p[dir="auto"]{font-style:normal;line-height:1.9}
+.quote cite{display:block;font-family:var(--mono);font-style:normal;font-size:11.5px;color:var(--muted);margin-top:6px}
+/* risks */
+.risk{display:grid;grid-template-columns:20px 1fr;gap:12px;padding:12px 0;border-bottom:1px solid var(--hair)}
+.risk:last-child{border-bottom:none}
+.risk .flag{color:var(--warn);font-family:var(--mono)}
+.risk b{font-family:var(--disp);font-weight:600;font-size:15.5px}
+.risk p{font-size:15px;color:var(--muted);margin-top:2px}
+/* transcript */
+details{border:1px solid var(--hair);border-radius:4px;background:var(--card)}
+summary{cursor:pointer;padding:14px 18px;font-family:var(--disp);font-weight:600;font-size:15px}
+summary::marker{color:var(--accent)}
+.transcript{padding:6px 18px 18px;display:grid;gap:16px;max-height:70vh;overflow-y:auto}
+.turn-meta{display:flex;gap:10px;align-items:baseline}
+.turn-ts{font-family:var(--mono);font-size:11px;color:var(--muted);font-variant-numeric:tabular-nums}
+.turn-sp{font-family:var(--disp);font-size:12.5px;font-weight:600;color:var(--accent-ink)}
+.turn-text{font-size:14.5px;line-height:1.8;margin-top:2px;color:var(--ink)}
+.turn-text[dir="auto"]{line-height:1.95}
+footer{margin-top:64px;border-top:1px solid var(--hair);padding-top:14px;font-family:var(--mono);
+  font-size:11px;color:var(--muted);letter-spacing:.04em;line-height:1.8}
+@media (prefers-reduced-motion: no-preference){
+  .bar i{transition:width .6s ease}
+}
+</style>
+</head>
+<body>
+<div class="page">
+
+<header>
+  <div class="eyebrow">{{EYEBROW}}</div>
+  <h1>{{TITLE}}</h1>
+  <p class="subtitle">{{SUBTITLE}}</p>
+  <div class="meta-row">{{META_CHIPS}}</div>
+</header>
+
+{{SECTIONS}}
+
+<section>
+  <div class="sec-label"><span>{{TRANSCRIPT_NO}}</span> · Full transcript</div>
+  <details>
+    <summary>Cleaned transcript — machine-transcribed</summary>
+    <div class="transcript">
+{{TRANSCRIPT}}
+    </div>
+  </details>
+</section>
+
+<footer>
+  {{FOOTER}}
+</footer>
+
+</div>
+</body>
+</html>

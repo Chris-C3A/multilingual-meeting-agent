@@ -1,0 +1,120 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/Chris-C3A/multilingual-meeting-agent/skills/process-meeting/templates/brief.schema.json",
+  "title": "Meeting brief (results/<stem>.actions.json)",
+  "description": "Structured output of /process-meeting. Validate with `mma validate results/<stem>.actions.json` before writing the brief or running any sink.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "stem", "title", "privacy", "summary", "decisions", "action_items",
+    "open_questions", "people", "companies", "language_notes"
+  ],
+  "properties": {
+    "stem": {"type": "string", "minLength": 1, "description": "Recording stem, e.g. \"demo\"."},
+    "title": {"type": "string", "minLength": 1, "maxLength": 120},
+    "date": {
+      "type": ["string", "null"],
+      "description": "Meeting date (YYYY-MM-DD) if known from the stem or the human, else null.",
+      "pattern": "^\\d{4}-\\d{2}-\\d{2}$"
+    },
+    "language": {"type": "string", "description": "Transcript language code from the JSON, e.g. \"ar\"."},
+    "privacy": {"enum": ["owner-only", "shared"]},
+    "category": {"enum": ["work", "personal", "uncertain"]},
+    "summary": {"type": "string", "minLength": 1, "description": "TL;DR, 2-5 sentences, English."},
+    "decisions": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["text"],
+        "properties": {
+          "text": {"type": "string", "minLength": 1},
+          "ts": {"$ref": "#/$defs/ts"}
+        }
+      }
+    },
+    "action_items": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["text", "owner", "due", "status"],
+        "properties": {
+          "text": {"type": "string", "minLength": 1},
+          "owner": {"type": ["string", "null"], "description": "Confirmed name or role label; null if nobody took it."},
+          "due": {"type": ["string", "null"], "description": "As said in the meeting (\"Thursday\") or a date; null if none."},
+          "status": {"enum": ["todo", "done"]},
+          "ts": {"$ref": "#/$defs/ts"}
+        }
+      }
+    },
+    "open_questions": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["text"],
+        "properties": {
+          "text": {"type": "string", "minLength": 1},
+          "owner": {"type": ["string", "null"]},
+          "ts": {"$ref": "#/$defs/ts"}
+        }
+      }
+    },
+    "people": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["name", "present"],
+        "properties": {
+          "name": {"type": "string", "minLength": 1},
+          "speaker": {"type": ["string", "null"], "description": "Diarization label, e.g. SPEAKER_00."},
+          "role": {"type": ["string", "null"]},
+          "present": {"type": "boolean", "description": "false = mentioned but not in the meeting."},
+          "name_confirmed": {"type": "boolean", "description": "true only if given via --names or by the human."}
+        }
+      }
+    },
+    "companies": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["name"],
+        "properties": {
+          "name": {"type": "string", "minLength": 1},
+          "context": {"type": ["string", "null"]}
+        }
+      }
+    },
+    "quotes": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["text", "speaker"],
+        "properties": {
+          "text": {"type": "string", "minLength": 1, "description": "Verbatim, original script."},
+          "translation": {"type": ["string", "null"]},
+          "speaker": {"type": "string"},
+          "ts": {"$ref": "#/$defs/ts"}
+        }
+      }
+    },
+    "language_notes": {
+      "type": "array",
+      "items": {"type": "string", "minLength": 1},
+      "description": "Dialects heard, code-switching patterns, STT doubts, terms kept in the original."
+    },
+    "quality_notes": {"type": "array", "items": {"type": "string"}},
+    "sinks": {
+      "type": "object",
+      "description": "Filled only after a sink actually ran with human approval.",
+      "additionalProperties": {"type": "array", "items": {"type": "string"}}
+    }
+  },
+  "$defs": {
+    "ts": {"type": "string", "pattern": "^(\\d+:)?\\d{2}:\\d{2}$", "description": "mm:ss or h:mm:ss as in clean.md."}
+  }
+}
